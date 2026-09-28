@@ -81,6 +81,23 @@ An internet connection is needed on the first run to download the dataset.
 
 A single-feature model using only `MedInc` is also included to show a simple linear regression as a plotted line.
 
+## Train/Test Split
+
+The dataset has 20,640 rows, which were split into a training set and a testing set:
+
+| Set | Rows | Share | Used for |
+|---|---|---|---|
+| Training | 16,512 | 80% | Training the model with `model.fit()` |
+| Testing | 4,128 | 20% | Evaluating the model on data it has never seen |
+
+The split was done with `train_test_split(X, y, test_size=0.2, random_state=42)`.
+
+**Why keep a separate test set?** A model tested on the same rows it trained on would only show how well it memorized the data, and the scores would be too optimistic. Evaluating on unseen rows shows how well the model predicts new data, which is the purpose of the model. An 80/20 split is a standard choice: the model gets plenty of data to learn from (16,512 rows), and the test set is large enough to give a reliable score.
+
+**Why `random_state=42`?** It fixes the random shuffling so the split is identical on every run, which makes the results reproducible.
+
+Features were scaled with `StandardScaler`, fitted on the training data only and then applied to the test data, so no information from the test set leaks into training.
+
 ## Results
 
 Replace the values below with the output from your terminal.
