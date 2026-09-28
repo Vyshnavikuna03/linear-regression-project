@@ -11,7 +11,7 @@ This project implements a linear regression model with scikit-learn to predict h
 - **Language:** Python 3
 - **Libraries:** scikit-learn, NumPy, Pandas
 - **Visualization:** Matplotlib
-- **Dataset:** California Housing dataset (built into scikit-learn)
+- **Dataset:** California Housing dataset (included as `california_housing.csv`)
 
 ## Dataset
 
@@ -21,7 +21,7 @@ The **California Housing dataset** is used in this project.
 
 | Property | Details |
 |---|---|
-| Source | 1990 U.S. Census data for California, loaded with `sklearn.datasets.fetch_california_housing` |
+| Source | 1990 U.S. Census data for California, originally from `sklearn.datasets.fetch_california_housing` and saved in this project as `california_housing.csv` |
 | Samples | 20,640 (each row is a census block group) |
 | Features | 8 numeric input features |
 | Target | `MedHouseVal`, the median house value in units of $100,000 |
@@ -45,6 +45,7 @@ The **California Housing dataset** is used in this project.
 ```
 linear-regression-project/
 ├── linear_regression_project.py   # main script
+├── california_housing.csv         # dataset (included, no download needed)
 ├── requirements.txt               # dependencies
 ├── README.md                      # project documentation
 ├── histograms.png                 # feature distributions
@@ -62,13 +63,13 @@ venv\Scripts\activate          # Windows
 source venv/bin/activate       # Mac/Linux
 
 # 2. Install dependencies
-pip install scikit-learn numpy pandas matplotlib
+pip install -r requirements.txt
 
 # 3. Run the project
 python linear_regression_project.py
 ```
 
-An internet connection is needed on the first run to download the dataset.
+The dataset is included as `california_housing.csv`, so no download is needed. If the file is missing, the script downloads the dataset from scikit-learn automatically (this needs an internet connection).
 
 ## Steps Followed
 
@@ -98,14 +99,6 @@ The split was done with `train_test_split(X, y, test_size=0.2, random_state=42)`
 
 Features were scaled with `StandardScaler`, fitted on the training data only and then applied to the test data, so no information from the test set leaks into training.
 
-
-### Plots
-
-![Feature distributions](histograms.png)
-![Actual vs predicted](actual_vs_predicted.png)
-![Residuals](residuals.png)
-![Simple linear regression](simple_regression.png)
-
 ## Results
 
 | Model | MSE | RMSE | MAE | R² |
@@ -120,6 +113,13 @@ Features were scaled with `StandardScaler`, fitted on the training data only and
 - **5-fold cross-validation R²:** 0.5530 (+/- 0.0617)
 - **Single-feature model (`MedInc`) R²:** 0.4589
 - **Most influential feature (largest coefficient):** `Latitude` (-0.8969), followed by `Longitude` (-0.8698) and `MedInc` (0.8544)
+
+### Plots
+
+![Feature distributions](histograms.png)
+![Actual vs predicted](actual_vs_predicted.png)
+![Residuals](residuals.png)
+![Simple linear regression](simple_regression.png)
 
 ## Conclusion
 
