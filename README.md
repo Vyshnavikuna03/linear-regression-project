@@ -98,20 +98,6 @@ The split was done with `train_test_split(X, y, test_size=0.2, random_state=42)`
 
 Features were scaled with `StandardScaler`, fitted on the training data only and then applied to the test data, so no information from the test set leaks into training.
 
-## Results
-
-Replace the values below with the output from your terminal.
-
-| Model | MSE | RMSE | MAE | R² |
-|---|---|---|---|---|
-| Linear Regression | | | | |
-| Ridge | | | | |
-| Lasso | | | | |
-| Linear + Feature Engineering | | | | |
-
-- **5-fold cross-validation R²:** 
-- **Single-feature model (`MedInc`) R²:** 
-- **Most influential feature (largest coefficient):** 
 
 ### Plots
 
@@ -120,9 +106,24 @@ Replace the values below with the output from your terminal.
 ![Residuals](residuals.png)
 ![Simple linear regression](simple_regression.png)
 
+## Results
+
+| Model | MSE | RMSE | MAE | R² |
+|---|---|---|---|---|
+| Linear Regression | 0.5559 | 0.7456 | 0.5332 | 0.5758 |
+| Ridge | 0.5559 | 0.7456 | 0.5332 | 0.5758 |
+| Lasso | 0.5545 | 0.7446 | 0.5331 | 0.5769 |
+| Linear + Feature Engineering | 0.4747 | 0.6890 | 0.4963 | 0.6378 |
+
+- **5-fold cross-validation R²:** 0.5530 (+/- 0.0617)
+- **Single-feature model (`MedInc`) R²:** 0.4589
+- **Most influential feature (largest coefficient):** `Latitude` (-0.8969), followed by `Longitude` (-0.8698) and `MedInc` (0.8544)
+
 ## Conclusion
 
-Linear regression gives a reasonable baseline for predicting house values, and median income (`MedInc`) is the strongest predictor. Regularization (Ridge and Lasso) and the feature engineering changed the scores only slightly, which suggests the relationship between the features and house price is not purely linear. More flexible models such as decision trees or gradient boosting could improve performance further.
+Linear regression gives a reasonable baseline for predicting house values, with an R² of about 0.58 on the test set. Ridge and Lasso gave almost the same scores as plain linear regression, because the dataset has few features and regularization has little to correct. Feature engineering (log transforms and a rooms-per-occupant ratio) gave the biggest improvement, raising R² to 0.6378 and lowering MSE from 0.5559 to 0.4747.
+
+Median income (`MedInc`) is the strongest single predictor: it has the highest correlation with the target (0.688) and reaches R² = 0.4589 on its own. `Latitude` and `Longitude` have the largest coefficients, which reflects how strongly location affects house prices in California. Since a linear model still leaves a lot of variance unexplained, more flexible models such as decision trees or gradient boosting could improve performance further.
 
 ## Learning Outcomes
 
