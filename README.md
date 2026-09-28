@@ -115,6 +115,8 @@ Features were scaled with `StandardScaler`, fitted on the training data only and
 | Lasso | 0.5545 | 0.7446 | 0.5331 | 0.5769 |
 | Linear + Feature Engineering | 0.4747 | 0.6890 | 0.4963 | 0.6378 |
 
+> Results are from a single run with `random_state=42`, so running the script again reproduces these exact numbers.
+
 - **5-fold cross-validation R²:** 0.5530 (+/- 0.0617)
 - **Single-feature model (`MedInc`) R²:** 0.4589
 - **Most influential feature (largest coefficient):** `Latitude` (-0.8969), followed by `Longitude` (-0.8698) and `MedInc` (0.8544)
